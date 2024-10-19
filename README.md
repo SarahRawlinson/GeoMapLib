@@ -35,7 +35,7 @@ Features:
 ## Image File
 use a png image to load terrain types (test image 50px x 50px)
 
-<img alt="image" height="400" width="400" src="/GeoMapLib/test/maps/test_map.png"/>
+<img alt="image" height="400" width="400" src="/test/maps/test_map.png"/>
 
 ## CSV Map Keys
 use csv to interpret the colours of the image pixel to a terrain type
