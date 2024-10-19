@@ -1,0 +1,5 @@
+ColorHex,TerrainType,Symbol
+#000000,Water,%
+#FFFFFF,Land,x
+#808080,Mountain,^
+#00FF00,Forest,*

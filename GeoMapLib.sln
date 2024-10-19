@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoMapLib", "GeoMapLib\GeoMapLib.csproj", "{E800566D-6F6B-4B39-BAF5-6FFC19229CB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E800566D-6F6B-4B39-BAF5-6FFC19229CB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E800566D-6F6B-4B39-BAF5-6FFC19229CB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E800566D-6F6B-4B39-BAF5-6FFC19229CB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E800566D-6F6B-4B39-BAF5-6FFC19229CB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
