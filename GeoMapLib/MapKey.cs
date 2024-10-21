@@ -1,12 +1,14 @@
+using SixLabors.ImageSharp.PixelFormats;
+
 namespace GeoMapLib;
 
 public class MapKey
 {
     public string Name;
     public string Key;
-    public string Colour;
+    public Rgba32 Colour;
 
-    public MapKey(string name, string key, string colour)
+    public MapKey(string name, string key, Rgba32 colour)
     {
         Name = name;
         Key = key;
