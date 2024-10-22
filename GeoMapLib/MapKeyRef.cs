@@ -4,29 +4,29 @@ namespace GeoMapLib;
 
 public class MapKeyRef
 {
-    private Dictionary<Rgba32, MapKey> terrainMappings = new Dictionary<Rgba32, MapKey>();
-    private Rgba32 blank = new Rgba32();
+    private readonly Dictionary<Rgba32, MapKey> _terrainMappings = new Dictionary<Rgba32, MapKey>();
+    private Rgba32 _blank = new Rgba32();
     public MapKey GetTerrainType(Rgba32 pixelColor)
     {
-        if (terrainMappings.ContainsKey(pixelColor))
+        if (_terrainMappings.TryGetValue(pixelColor, out var type))
         {
-            return terrainMappings[pixelColor];
+            return type;
         }
-        return new MapKey("unknown", "?",  blank);
+        return new MapKey("unknown", "?",  _blank);
     }
 
     public Dictionary<Rgba32, MapKey> GetAllTerrains()
     {
-        return terrainMappings;
+        return _terrainMappings;
     }
 
     public void AddMapKey(string terrainType, string symbol, Rgba32 color)
     {
-        if (!terrainMappings.ContainsKey(color))
+        if (!_terrainMappings.ContainsKey(color))
         {
             if (terrainType != String.Empty && symbol != String.Empty)
             {
-                terrainMappings.Add(color, new MapKey(terrainType, symbol, color));
+                _terrainMappings.Add(color, new MapKey(terrainType, symbol, color));
             }
         }
     }

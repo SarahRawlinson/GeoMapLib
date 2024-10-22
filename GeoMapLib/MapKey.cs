@@ -8,7 +8,7 @@ public class MapKey
     public string Key;
     public Rgba32 Colour;
 
-    public MapKey(string name, string key, Rgba32 colour)
+    public MapKey(string name = "unknown", string key = "?", Rgba32 colour = new Rgba32())
     {
         Name = name;
         Key = key;

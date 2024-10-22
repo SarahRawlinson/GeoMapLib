@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoMapLib", "GeoMapLib\GeoM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "test", "test\test.csproj", "{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{F6A15BFC-170E-4BBB-82DB-E317067EC6DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF87F1E8-C9CE-4B09-B184-5495AE5AF4A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6A15BFC-170E-4BBB-82DB-E317067EC6DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6A15BFC-170E-4BBB-82DB-E317067EC6DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6A15BFC-170E-4BBB-82DB-E317067EC6DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6A15BFC-170E-4BBB-82DB-E317067EC6DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

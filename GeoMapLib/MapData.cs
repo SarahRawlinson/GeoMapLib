@@ -2,7 +2,7 @@ namespace GeoMapLib;
 
 public class MapData
 {
-    private readonly MapKey[,] _terrainMap;
+    private readonly MapKey?[,] _terrainMap;
     public readonly int Width;
     public readonly int Height;
     public readonly MapKeyRef MapKeyRef;
@@ -17,10 +17,16 @@ public class MapData
     
     public MapKey GetTerrainAt(int x, int y)
     {
-        return _terrainMap[x, y];
+        var terrain = _terrainMap[x, y];
+        if (terrain == null) 
+        {
+            terrain = new MapKey();
+            _terrainMap[x, y] = terrain;
+        }
+        return terrain; 
     }
 
-    public void SetTerrain(int x, int y, MapKey terrainType)
+    public void SetTerrain(int x, int y, MapKey? terrainType)
     {
         _terrainMap[x, y] = terrainType;
     }

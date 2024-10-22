@@ -1,5 +1,4 @@
 ﻿using GeoMapLib;
-using SixLabors.ImageSharp.PixelFormats;
 
 class Program
 {
@@ -13,8 +12,7 @@ class Program
         MapKeyRef mapKeyRef = PixelEnvironmentMapper.LoadTerrainMappings(csvPath);
         
         // Load the map
-        MapLoader mapLoader = new MapLoader();
-        MapData mapData = mapLoader.LoadMap(mapPath, mapKeyRef);
+        MapData mapData = MapLoader.LoadMap(mapPath, mapKeyRef);
         
 
         Console.ForegroundColor = ConsoleColor.White;
@@ -27,12 +25,12 @@ class Program
         foreach (var key in mapKeyRef.GetAllTerrains())
         {
             // try not to use the same color multiple times for printing to console
-            ConsoleColor randomColor = (ConsoleColor)colorValues.GetValue(random.Next(colorValues.Length));
+            ConsoleColor randomColor = (ConsoleColor)(colorValues.GetValue(random.Next(colorValues.Length)) ?? ConsoleColor.White);
             if (colors.Count < colorValues.Length)
             {
                 while (colors.ContainsValue(randomColor))
                 {
-                    randomColor = (ConsoleColor)colorValues.GetValue(random.Next(colorValues.Length));
+                    randomColor = (ConsoleColor)(colorValues.GetValue(random.Next(colorValues.Length)) ?? ConsoleColor.White);
                 }
             }
             colors.Add(key.Value.Key, randomColor);
@@ -51,7 +49,7 @@ class Program
         
         // Edit map
         colors.Add("?", ConsoleColor.Red);
-        MapKey unknown = new MapKey("unknown", "?", new Rgba32());
+        MapKey unknown = new MapKey();
         mapData.SetTerrain(0,0, unknown);
         mapData.SetTerrain(0,1, unknown);
         mapData.SetTerrain(0,2, unknown);
