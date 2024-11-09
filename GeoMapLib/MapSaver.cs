@@ -29,7 +29,7 @@ public static class MapSaver
             for (int y = 0; y < mapData.Height; y++)
             {
                 MapKey terrainType = mapData.GetTerrainAt(y, x);
-                Rgba32 pixelColor = terrainType.Colour;
+                Rgba32 pixelColor = terrainType.ColorHex;
                 image[x, y] = pixelColor;
             }
         }

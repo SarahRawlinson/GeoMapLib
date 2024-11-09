@@ -17,9 +17,9 @@ public class MapKeyTest
         
         MapKey mapKey = new();
         
-        Assert.That(mapKey.Name, Is.EqualTo(defaultName));
-        Assert.That(mapKey.Key, Is.EqualTo(defaultKey));
-        Assert.That(mapKey.Colour, Is.EqualTo(defaultColour));
+        Assert.That(mapKey.TerrainType, Is.EqualTo(defaultName));
+        Assert.That(mapKey.Symbol, Is.EqualTo(defaultKey));
+        Assert.That(mapKey.ColorHex, Is.EqualTo(defaultColour));
     }
 
     [Test]
@@ -35,8 +35,8 @@ public class MapKeyTest
 
         MapKey mapKey = new(name, key, expectedColour);
         
-        Assert.That(mapKey.Name, Is.EqualTo(name));
-        Assert.That(mapKey.Key, Is.EqualTo(key));
-        Assert.That(mapKey.Colour, Is.EqualTo(expectedColour));
+        Assert.That(mapKey.TerrainType, Is.EqualTo(name));
+        Assert.That(mapKey.Symbol, Is.EqualTo(key));
+        Assert.That(mapKey.ColorHex, Is.EqualTo(expectedColour));
     }
 }

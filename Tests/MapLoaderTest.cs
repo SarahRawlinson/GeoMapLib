@@ -93,9 +93,9 @@ public class MapLoaderTest
             {
                 var terrainAt = result.GetTerrainAt(x,y);
                 var mapKey = _testMap.GetTerrainAt(x,y);
-                Assert.That(terrainAt.Key, Is.EqualTo(mapKey.Key));
-                Assert.That(terrainAt.Name, Is.EqualTo(mapKey.Name));
-                Assert.That(terrainAt.Colour, Is.EqualTo(mapKey.Colour));
+                Assert.That(terrainAt.Symbol, Is.EqualTo(mapKey.Symbol));
+                Assert.That(terrainAt.TerrainType, Is.EqualTo(mapKey.TerrainType));
+                Assert.That(terrainAt.ColorHex, Is.EqualTo(mapKey.ColorHex));
             }
         }
         File.Delete(validFilePath);
@@ -109,7 +109,7 @@ public class MapLoaderTest
             for (int y = 0; y < mapData.Height; y++)
             {
                 MapKey terrainType = mapData.GetTerrainAt(y, x);
-                Rgba32 pixelColor = terrainType.Colour;
+                Rgba32 pixelColor = terrainType.ColorHex;
                 image[x, y] = pixelColor;
             }
         }

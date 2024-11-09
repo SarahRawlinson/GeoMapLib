@@ -1,4 +1,5 @@
 ﻿using GeoMapLib;
+using SixLabors.ImageSharp.PixelFormats;
 
 class Program
 {
@@ -6,6 +7,7 @@ class Program
     {
         string mapPath = "../../../maps/test_map.png";  // Path to your test map image
         string csvPath = "../../../csv/terrain_mapping.csv";  // Path to the terrain mapping CSV
+        string csvPathSave = "../../../csv/terrain_mapping_save.csv";  // Path to your test save terrain mapping CSV
         string mapPathSave = "../../../maps/test_map_save.png";  // Path to your test save map image
 
         // Load the terrain mappings from the CSV
@@ -14,41 +16,18 @@ class Program
         // Load the map
         MapData mapData = MapLoader.LoadMap(mapPath, mapKeyRef);
         
-
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("***** - Map Key Table - *****");
-        
-        // Get all possible ConsoleColor values for printing to console
-        Array colorValues = Enum.GetValues(typeof(ConsoleColor));
-        Random random = new Random();
-        Dictionary<string, ConsoleColor> colors = new Dictionary<string, ConsoleColor>();
-        foreach (var key in mapKeyRef.GetAllTerrains())
-        {
-            // try not to use the same color multiple times for printing to console
-            ConsoleColor randomColor = (ConsoleColor)(colorValues.GetValue(random.Next(colorValues.Length)) ?? ConsoleColor.White);
-            if (colors.Count < colorValues.Length)
-            {
-                while (colors.ContainsValue(randomColor))
-                {
-                    randomColor = (ConsoleColor)(colorValues.GetValue(random.Next(colorValues.Length)) ?? ConsoleColor.White);
-                }
-            }
-            colors.Add(key.Value.Key, randomColor);
-            Console.ForegroundColor = randomColor;
-            
-            // Get map key
-            MapKey terrainType = mapKeyRef.GetTerrainType(key.Key);
-            // Print key
-            Console.WriteLine($"{terrainType.Key} = {terrainType.Name}");
-        }
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("***** - Original Map - *****");
+        // Get Console Colours
+        var colors = PrettyMapConsole.GetConsoleColors(mapKeyRef);
         
         // Print original map
-        PrintMap(mapData, colors);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("***** - Original Map - *****");
+        Console.ForegroundColor = default;
+        PrettyMapConsole.PrintMapKeyTable(mapKeyRef, colors);
+        PrettyMapConsole.PrintMap(mapData, colors, 50, 50);
         
         // Edit map
-        colors.Add("?", ConsoleColor.Red);
+        mapKeyRef.AddMapKey("unknown", "?", new Rgba32());
         MapKey unknown = new MapKey();
         mapData.SetTerrain(0,0, unknown);
         mapData.SetTerrain(0,1, unknown);
@@ -56,28 +35,31 @@ class Program
         mapData.SetTerrain(0,3, unknown);
         mapData.SetTerrain(0,4, unknown);
 
+        // Print edited map
+        //colors = PrettyMapConsole.GetConsoleColors(mapKeyRef);
+        colors.Add("?", ConsoleColor.Red);
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("***** - Edited Map - *****");
-        
-        // Print edited map
-        PrintMap(mapData, colors);
+        Console.ForegroundColor = default;
+        PrettyMapConsole.PrintMapKeyTable(mapKeyRef, colors);
+        PrettyMapConsole.PrintMap(mapData, colors, 50, 50);
         
         // Save map to png
         MapSaver.SaveMap(mapPathSave, mapData);
+        
+        // Save map key to csv
+        PixelEnvironmentMapper.SaveTerrainMappings(csvPathSave, mapKeyRef);
+        
+        // See saved data loaded to make sure results are expected
+        MapKeyRef savedMapKeyRef = PixelEnvironmentMapper.LoadTerrainMappings(csvPathSave);
+        MapData saveMapData = MapLoader.LoadMap(mapPathSave, mapKeyRef);
+        Console.ForegroundColor = ConsoleColor.White;
+        Console.WriteLine("***** - Saved Map - *****");
+        Console.ForegroundColor = default;
+        PrettyMapConsole.PrintMapKeyTable(savedMapKeyRef, colors);
+        PrettyMapConsole.PrintMap(saveMapData, colors, 50, 50);
+        
     }
+
     
-    private static void PrintMap(MapData mapData, Dictionary<string, ConsoleColor> colors)
-    {
-        // Print the terrain type at each location
-        for (int x = 0; x < 50; x++)
-        {
-            for (int y = 0; y < 50; y++)
-            {
-                MapKey terrainType = mapData.GetTerrainAt(x, y);
-                Console.ForegroundColor = colors[terrainType.Key];
-                Console.Write($"{terrainType.Key} ");
-            }
-            Console.WriteLine();
-        }
-    }
 }

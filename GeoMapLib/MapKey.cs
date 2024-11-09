@@ -4,14 +4,14 @@ namespace GeoMapLib;
 
 public class MapKey
 {
-    public string Name;
-    public string Key;
-    public Rgba32 Colour;
+    public readonly string TerrainType;
+    public readonly string Symbol;
+    public Rgba32 ColorHex;
 
-    public MapKey(string name = "unknown", string key = "?", Rgba32 colour = new Rgba32())
+    public MapKey(string terrainType = "unknown", string symbol = "?", Rgba32 colorHex = new Rgba32())
     {
-        Name = name;
-        Key = key;
-        Colour = colour;
+        TerrainType = terrainType;
+        Symbol = symbol;
+        ColorHex = colorHex;
     }
 }

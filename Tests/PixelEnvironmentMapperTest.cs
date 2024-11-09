@@ -44,10 +44,38 @@ public class PixelEnvironmentMapperTest
         
         var result = PixelEnvironmentMapper.LoadTerrainMappings(csvPath);
         var data = new MapKey("Mountain", "M");
-        Assert.That(result.GetAllTerrains().First().Value.Key, Is.EqualTo(data.Key));
-        Assert.That(result.GetAllTerrains().First().Value.Name, Is.EqualTo(data.Name));
-        Assert.That(result.GetAllTerrains().First().Value.Colour, Is.EqualTo(data.Colour));
+        Assert.That(result.GetAllTerrains().First().Value.Symbol, Is.EqualTo(data.Symbol));
+        Assert.That(result.GetAllTerrains().First().Value.TerrainType, Is.EqualTo(data.TerrainType));
+        Assert.That(result.GetAllTerrains().First().Value.ColorHex, Is.EqualTo(data.ColorHex));
         Assert.That(result.GetAllTerrains().First().Key, Is.EqualTo(new Rgba32()));
+    }
+    
+    [Test]
+    public void SaveTerrainMappings_ValidInput_WritesToFileCorrectly()
+    {
+        var originalTerrainMap = new MapKeyRef();
+        var testTerrainMapKeys = new List<MapKey>
+        {
+            new("Mountain", "M", new Rgba32(255,255,255)),
+            new("Grassland", "G", new Rgba32(0,128,0))
+        };
+        foreach (var key in testTerrainMapKeys)
+        {
+            originalTerrainMap.AddMapKey(key.TerrainType, key.Symbol, key.ColorHex);
+        }
+
+        var csvPath = Path.GetTempFileName();
+        PixelEnvironmentMapper.SaveTerrainMappings(csvPath, originalTerrainMap);
+
+        var loadedTerrainMap = PixelEnvironmentMapper.LoadTerrainMappings(csvPath);
+        
+        foreach (var originalTerrain in originalTerrainMap.GetAllTerrains())
+        {
+            Assert.That(loadedTerrainMap.GetAllTerrains(), Does.ContainKey(originalTerrain.Key));
+            Assert.That(loadedTerrainMap.GetTerrainType(originalTerrain.Key).TerrainType, Is.EqualTo(originalTerrain.Value.TerrainType));
+            Assert.That(loadedTerrainMap.GetTerrainType(originalTerrain.Key).Symbol, Is.EqualTo(originalTerrain.Value.Symbol));
+            Assert.That(loadedTerrainMap.GetTerrainType(originalTerrain.Key).ColorHex, Is.EqualTo(originalTerrain.Value.ColorHex));
+        }
     }
 
     [Test]

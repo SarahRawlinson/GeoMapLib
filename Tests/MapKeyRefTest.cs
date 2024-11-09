@@ -16,9 +16,9 @@ public class MapKeyRefTest
         mapKeyRef.AddMapKey("terrainType", "symbol", color);
         var result = mapKeyRef.GetTerrainType(color);
 
-        Assert.That(result.Name, Is.EqualTo("terrainType"));
-        Assert.That(result.Key, Is.EqualTo("symbol"));
-        Assert.That(result.Colour, Is.EqualTo(color));
+        Assert.That(result.TerrainType, Is.EqualTo("terrainType"));
+        Assert.That(result.Symbol, Is.EqualTo("symbol"));
+        Assert.That(result.ColorHex, Is.EqualTo(color));
     }
 
     [Test]
@@ -26,8 +26,8 @@ public class MapKeyRefTest
     {
         var mapKeyRef = new MapKeyRef();
         var result = mapKeyRef.GetTerrainType(new Rgba32(255, 255, 255, 255));
-        Assert.That(result.Name, Is.EqualTo("unknown"));
-        Assert.That(result.Key, Is.EqualTo("?"));
+        Assert.That(result.TerrainType, Is.EqualTo("unknown"));
+        Assert.That(result.Symbol, Is.EqualTo("?"));
     }
 
     [Test]
@@ -39,9 +39,9 @@ public class MapKeyRefTest
         Dictionary<Rgba32, MapKey> result = mapKeyRef.GetAllTerrains();
 
         Assert.That(result.ContainsKey(color));
-        Assert.That(result[color].Name, Is.EqualTo("terrainType"));
-        Assert.That(result[color].Key, Is.EqualTo("symbol"));
-        Assert.That(result[color].Colour, Is.EqualTo(color));
+        Assert.That(result[color].TerrainType, Is.EqualTo("terrainType"));
+        Assert.That(result[color].Symbol, Is.EqualTo("symbol"));
+        Assert.That(result[color].ColorHex, Is.EqualTo(color));
     }
 
     [Test]
@@ -52,9 +52,9 @@ public class MapKeyRefTest
         mapKeyRef.AddMapKey("terrainType", "symbol", color);
         var result = mapKeyRef.GetTerrainType(color);
 
-        Assert.That(result.Name, Is.EqualTo("terrainType"));
-        Assert.That(result.Key, Is.EqualTo("symbol"));
-        Assert.That(result.Colour, Is.EqualTo(color));
+        Assert.That(result.TerrainType, Is.EqualTo("terrainType"));
+        Assert.That(result.Symbol, Is.EqualTo("symbol"));
+        Assert.That(result.ColorHex, Is.EqualTo(color));
     }
 
     [Test]
@@ -66,9 +66,9 @@ public class MapKeyRefTest
         mapKeyRef.AddMapKey("terrainType2", "symbol2", color);
         var result = mapKeyRef.GetTerrainType(color);
 
-        Assert.That(result.Name, Is.EqualTo("terrainType1"));
-        Assert.That(result.Key, Is.EqualTo("symbol1"));
-        Assert.That(result.Colour, Is.EqualTo(color));
+        Assert.That(result.TerrainType, Is.EqualTo("terrainType1"));
+        Assert.That(result.Symbol, Is.EqualTo("symbol1"));
+        Assert.That(result.ColorHex, Is.EqualTo(color));
     }
 
     [Test]
@@ -80,7 +80,7 @@ public class MapKeyRefTest
         mapKeyRef.AddMapKey("terrainType", "", color);
         var result = mapKeyRef.GetTerrainType(color);
 
-        Assert.That(result.Name, Is.EqualTo("unknown"));
-        Assert.That(result.Key, Is.EqualTo("?"));
+        Assert.That(result.TerrainType, Is.EqualTo("unknown"));
+        Assert.That(result.Symbol, Is.EqualTo("?"));
     }
 }
